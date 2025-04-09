@@ -1,24 +1,19 @@
 using System;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] private GameObject enemy;
     private bool bodyCheck;
     private bool headCheck;
     private int score;
-    private Collider headShot;
-
-    private void Awake()
-    {
-        enemy = GameObject.Find("Enemy");
-        headShot = GameObject.Find("Enemy").GetComponent<Collider>();
-        
-    }
+    [SerializeField] private GameObject enemy;
 
     private void OnCollisionEnter(Collision other)
     {
+        GameObject headShot = GetComponentInChildren<GameObject>();
+        Collision headCollision = headShot.GetComponent<Collision>();
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         if (other.gameObject.name == "Enemy")
         {
@@ -29,7 +24,7 @@ public class Ball : MonoBehaviour
             }
         }
 
-        if (headShot.isTrigger)
+        if (other == headCollision) 
         {
             if (headCheck)
             {

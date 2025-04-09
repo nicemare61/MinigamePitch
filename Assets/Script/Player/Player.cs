@@ -45,8 +45,8 @@ public class Player : MonoBehaviour
     private void GenerateBall()
     {
         Instantiate(ballKick, transform.position + new Vector3(1,0,0), transform.rotation);
-        Rigidbody ballRb = gameObject.GetComponent<Rigidbody>();
-        ballRb.AddForce(transform.forward * 10, ForceMode.VelocityChange);
+        Rigidbody ballRb = ballKick.GetComponent<Rigidbody>();
+        ballRb.AddForce(transform.forward, ForceMode.Impulse);
     }
     
 }
