@@ -36,12 +36,17 @@ public class Player : MonoBehaviour
     private void Update()
     {
         MoveByKB();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GenerateBall();
+        }
     }
 
     private void GenerateBall()
     {
         Instantiate(ballKick, transform.position + new Vector3(1,0,0), transform.rotation);
-        Rigidbody  ballRb = gameObject.GetComponent<Rigidbody>();
+        Rigidbody ballRb = gameObject.GetComponent<Rigidbody>();
+        ballRb.AddForce(transform.forward * 10, ForceMode.VelocityChange);
     }
     
 }
